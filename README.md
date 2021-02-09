@@ -1,6 +1,6 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ralfes&url=https://github.com/ralfes/chocolatey-packages&title=chocolatey-packages&language=&tags=github&category=software) 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ralfes&url=https://github.com/ralfes/chocolatey-packages&title=chocolatey-packages&language=&tags=github&category=software) [![Join the chat at https://gitter.im/RalfEs-Chocolatey-Packages/community](https://badges.gitter.im/RalfEs-Chocolatey-Packages/community.svg)](https://gitter.im/RalfEs-Chocolatey-Packages/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 
 # Chocolatey Softwarepakete
