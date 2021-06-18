@@ -1,7 +1,7 @@
-﻿$ErrorActionPreference = 'Stop';
+$ErrorActionPreference = 'Stop'
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $url        = 'https://github.com/Chia-Network/chia-blockchain/releases/download/1.1.7/ChiaSetup-1.1.7.exe'
-$process	= "Chia"
+$process    = "Chia"
 
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
@@ -17,13 +17,11 @@ $packageArgs = @{
   silentArgs   = '/S'
 }
 
-$CheckProcess = Get-Process | Where-Object {$_.ProcessName -eq $process}
-If($CheckProcess -eq $null){
-	Write-Host "Prozess wird aktuell nicht ausgeführt"
-	} 
-	else {
-	Write-Host "Prozess wird aktuell ausgeführt"
+if (-not (Get-Process -Name $process -ErrorAction SilentlyContinue)) {
+    Write-Host "Process is not currently running."
+} else {
+    Write-Host "Process is currently running. Killing process '$process' before install."
     Stop-Process -Name $process
-	}
+}
 
 Install-ChocolateyPackage @packageArgs
