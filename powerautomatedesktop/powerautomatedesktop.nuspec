@@ -16,6 +16,27 @@
     <summary>Use the desktop and web recorders to create flows while you edit the recorded actions in real time over the web or on the desktop.</summary>
     <description>Desktop flows are used to automate tasks on the Web or the desktop. Using Power Automate Desktop you can automate tasks on the desktop as well as the Web. Alternatively, you can use the two legacy methods of creating desktop flow.
 		If this package isn't up-to-date for some days, please [create an issue](https://github.com/RalfEs73/chocolatey-packages/issues/new/choose).
+
+    ## Package installation defaults
+
+    By default, **installation** of this package:
+
+    - Will not silently register Power Automate Desktop to your Power Automate Portal.
+
+    ## Package Parameters
+
+    - `/register` - **Optional** Specifies that you want to Register
+    - `/applicationid:appid` - **Required with `/register`** App Registration Application (client) ID
+    - `/tenantid:tenantid` - **Required with `/register`** Directory (tenant) ID
+    - `/environmentid:envid` - **Optional with `/register`**
+    - `/clientsecret:secret` or `/certificatethumbprint:secret`- **Required with `/register`**
+
+    ### Silent Registration Microsoft Docs
+    - https://learn.microsoft.com/en-us/power-automate/desktop-flows/machines-silent-registration
+
+    These parameters can be passed to the installer with the use of `-params`.
+    For example :
+    `choco install adobereader -params '"/register /applicationid: /tenantid"' --install-arguments-sensitive 'clientsecret'`
 	</description>
   </metadata>
   <files>
