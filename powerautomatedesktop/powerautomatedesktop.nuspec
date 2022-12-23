@@ -28,15 +28,15 @@
     - `/register` - **Optional** Specifies that you want to Register
     - `/applicationid:appid` - **Required with `/register`** App Registration Application (client) ID
     - `/tenantid:tenantid` - **Required with `/register`** Directory (tenant) ID
-    - `/environmentid:envid` - **Optional with `/register`**
-    - `/clientsecret:secret` or `/certificatethumbprint:secret`- **Required with `/register`**
+    - `/environmentid:envid` - **Optional with `/register`** Specifies the environment in the Power Platform Machine will be added
+    - `/clientsecret:secret` or `/certificatethumbprint:secret`- **Required with `/register`** Secret password for silent Registration
 
     ### Silent Registration Microsoft Docs
     - https://learn.microsoft.com/en-us/power-automate/desktop-flows/machines-silent-registration
 
     These parameters can be passed to the installer with the use of `-params`.
     For example :
-    `choco install adobereader -params '"/register /applicationid: /tenantid"' --install-arguments-sensitive 'clientsecret'`
+    `choco install powerautomatedesktop -params '"/register /applicationid:00000000-0000-0000-0000-000000000000 /tenantid:DirectoryTenantID /clientsecret:appsecret"'`
 	</description>
   </metadata>
   <files>

@@ -16,33 +16,42 @@ $packageArgs = @{
 
   silentArgs   = '/S -accepteula'
 }
-
 Install-ChocolateyPackage @packageArgs
 
-if ($pp['register']){
+
+if ($pp['register'])
+{
   if(($pp['applicationid']) -and ($pp['tenantid'])){
-    if($pp['clientsecret']){
-      if($pp['environmentid']){
-        Write-Output $pp['clientsecret'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -clientsecret -applicationid $pp['applicationid'] -tenantid $pp['tenantid'] -environmentid $pp['environmentid']
+    try{
+      if($pp['clientsecret']){
+        if($pp['environmentid']){
+          Write-Output $pp['clientsecret'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -clientsecret -applicationid $pp['applicationid'] -tenantid $pp['tenantid'] -environmentid $pp['environmentid']
+        }
+        else{
+          Write-Output $pp['clientsecret'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -clientsecret -applicationid $pp['applicationid'] -tenantid $pp['tenantid']
+        }
       }
-      else{
-        Write-Output $pp['clientsecret'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -clientsecret -applicationid $pp['applicationid'] -tenantid $pp['tenantid']
+      elseif ($pp['certificatethumbprint']) {
+        if($pp['environmentid']){
+          Write-Output $pp['certificatethumbprint'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -certificatethumbprint -applicationid $pp['applicationid'] -tenantid $pp['tenantid'] -environmentid $pp['environmentid']
+        }
+        else{
+          Write-Output $pp['certificatethumbprint'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -certificatethumbprint -applicationid $pp['applicationid'] -tenantid $pp['tenantid']
+        }
+        
       }
-    }
-    elseif ($pp['certificatethumbprint']) {
-      if($pp['environmentid']){
-        Write-Output $pp['certificatethumbprint'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -certificatethumbprint -applicationid $pp['applicationid'] -tenantid $pp['tenantid'] -environmentid $pp['environmentid']
+      else {
+        Write-Warning "Please specify Certificate or Client Secret you will need to register manually or troubleshoot then run again with --force"
       }
-      else{
-        Write-Output $pp['certificatethumbprint'] | C:\'Program Files (x86)'\'Power Automate Desktop'\PAD.MachineRegistration.Silent.exe -register -certificatethumbprint -applicationid $pp['applicationid'] -tenantid $pp['tenantid']
-      }
-      
-    }
-    else {
-      Write-Output "Unable to register please specify Certificate or Client Secret"
+  }
+    catch
+    {
+      Write-Warning "Failed registering to Power Platform Error: $($Error[0])" 
+      Write-Warning "Please register manually or troubleshoot then run again with --force"
     }
   }
   else {
-    Write-Output "Unable to register please specify Applicationid, tenantid, and certificatethumbprint or clientsecret"
+    Write-Warning "Please specify Applicationid, tenantid, and certificatethumbprint or clientsecret you will need to register manually or troubleshoot then run again with --force"
   }
-}
+}  
+
